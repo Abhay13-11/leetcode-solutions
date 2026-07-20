@@ -8,11 +8,7 @@ public:
             small=min(small,it);
             large=max(large,it);
         }
-        if(large%small==0) return small;
-        for(int i=small;i>=1;i--)
-        {
-            if(small%i==0 && large%i==0) return i;
-        }
-        return 1;
+        
+        return gcd(small,large);
     }
 };
