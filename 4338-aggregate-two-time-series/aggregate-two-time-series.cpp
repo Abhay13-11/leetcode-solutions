@@ -2,37 +2,40 @@ class Solution {
 public:
     vector<vector<int>> aggregateTimeSeries(vector<vector<int>>& series1,
                                             vector<vector<int>>& series2) {
-
-        set<int> st;
-
-        for (auto &x : series1)
-            st.insert(x[0]);
-
-        for (auto &x : series2)
-            st.insert(x[0]);
-
+        int n1 = series1.size();
+        int n2 = series2.size();
         vector<vector<int>> ans;
 
-        for (int t : st) {
+        int i=0, j = 0;
 
-            int v1 = 0;
-            int v2 = 0;
-
-            auto it1 = lower_bound(series1.begin(), series1.end(),
-                                   vector<int>{t, INT_MIN});
-
-            if (it1 != series1.end())
-                v1 = (*it1)[1];
-
-            auto it2 = lower_bound(series2.begin(), series2.end(),
-                                   vector<int>{t, INT_MIN});
-
-            if (it2 != series2.end())
-                v2 = (*it2)[1];
-
-            ans.push_back({t, v1 + v2});
+        while (i < n1 && j < n2) {
+            if (series1[i][0] < series2[j][0]) {
+                ans.push_back({series1[i][0], (series1[i][1] + series2[j][1])});
+                i++;
+            } else if(series1[i][0] > series2[j][0]){
+                ans.push_back({series2[j][0], (series1[i][1] + series2[j][1])});
+                j++;
+            }
+            else
+            {
+                ans.push_back({series1[i][0], (series1[i][1] + series2[j][1])});
+                i++;
+                j++;  
+            }
+        }
+        while (i < n1) {
+            ans.push_back({series1[i][0], series1[i][1]});
+            i++;
+        }
+        while (j < n2) {
+            ans.push_back({series2[j][0], series2[j][1]});
+            j++;
         }
 
         return ans;
+
+        
     }
-};
+
+}
+;
