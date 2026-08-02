@@ -8,7 +8,7 @@ public:
         {
             if(s[i]=='1') c1++;
             else c0++;
-            if(abs(c0-c1)<=1 && abs(c1-c0)>=-1) ans++;
+            if(abs(c0-c1)<=1 ) ans++;
         }
         return ans;
         }
