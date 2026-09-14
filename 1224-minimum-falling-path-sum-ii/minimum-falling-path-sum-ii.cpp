@@ -20,11 +20,11 @@ public:
     int minFallingPathSum(vector<vector<int>>& grid) {
         int n=grid.size();
         int tell=INT_MAX;
-        vector<vector<int>> dp(n,vector<int>(n,0));
-       
+        // vector<vector<int>> dp(n,vector<int>(n,0));
+       vector<int> prev(n,0),curr(n,0);
         for(int j=0;j<n;j++)
         {
-            dp[n-1][j]=grid[n-1][j];
+            prev[j]=grid[n-1][j];
         }
         
         for(int i=n-2;i>=0;i--)
@@ -36,15 +36,16 @@ public:
                 {
                     if(k!=j)
                     {
-                        ans=min(ans,grid[i][j]+dp[i+1][k]);
+                        ans=min(ans,grid[i][j]+prev[k]);
                     }
                 }
-                  dp[i][j]=ans;
+                  curr[j]=ans;
              }
+             prev=curr;
         }
          for(int i=0;i<n;i++)
         {
-            tell=min(tell,dp[0][i]);
+            tell=min(tell,prev[i]);
         }
         return tell;
      
