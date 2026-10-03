@@ -1,14 +1,14 @@
 class Solution {
-    int maxi(int i,int j,vector<int> &arr)
-    {
-        int add=0;
-        for(int k=i;k<=j;k++)
-        {
-            add=max(add,arr[k]);
-        }
-        return add;
+    // int maxi(int i,int j,vector<int> &arr)
+    // {
+    //     int add=0;
+    //     for(int k=i;k<=j;k++)
+    //     {
+    //         add=max(add,arr[k]);
+    //     }
+    //     return add;
 
-    }
+    // }
     // int solve(int i,int n,vector<int> &arr,int k,vector<int> &dp)
     // {
     //     if(i>=n) return 0;
@@ -32,13 +32,14 @@ public:
         for(int i=n-1;i>=0;i--)
         {
             int ans=0;
-            for(int j=i;j<n;j++)
+            int maxi=arr[i];
+            for(int j=i;j<i+k && j<n;j++)
             {
-                if(j-i+1<=k)
-                {
-                    int cost=maxi(i,j,arr)*(j-i+1)+dp[j+1];
+               
+                    maxi=max(maxi,arr[j]);
+                    int cost=maxi*(j-i+1)+dp[j+1];
                     ans=max(cost,ans);
-                }
+                
             }
              dp[i]=ans;
         }
