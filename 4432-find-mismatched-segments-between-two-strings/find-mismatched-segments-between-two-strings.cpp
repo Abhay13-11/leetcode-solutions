@@ -6,17 +6,14 @@ public:
         for(int i=0;i<n;i++)
         {
             int j=i;
-            string a="";
-            string b="";
+           
             while(s1[i]!=s2[i])
             {
-                a+=s1[i];
-                b+=s2[i];
                 i++;
             }
-            if(a.size()!=0)
+            if(i-j!=0)
             {
-                ans.push_back({a,b});
+                ans.push_back({s1.substr(j,i-j),s2.substr(j,i-j)});
             }
         }
         return ans;
